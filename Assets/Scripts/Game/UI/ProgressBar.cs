@@ -16,18 +16,18 @@ namespace Game.UI
         private Text _text;
 
         [SerializeField]
-        private GameObject _floatingTextPrefab;
-
-        [SerializeField]
         private Building _building;
 
         private float _remainingTime;
+
+        private int _buildingId;
 
         // Start is called before the first frame update
         void Start()
         {   
             _remainingTime = GameDataManager.Instance.m_GameData.m_MapData.GetBuildingData(_building.id).m_RemainingGenerationDuration;
-            var scaleFactor = (_building. resourceGenerationDuration - _remainingTime) / _building.resourceGenerationDuration;
+            _buildingId = _building.id;
+            var scaleFactor = (_building.resourceGenerationDuration - _remainingTime) / _building.resourceGenerationDuration;
             _bar.localScale = new Vector3(scaleFactor, 1f);
             _text.text = $"{_remainingTime}s";
             GameManager.Instance.countdownSystem.Subscribe(OnTick);
@@ -36,6 +36,7 @@ namespace Game.UI
         private void OnDestroy()
         {
             GameManager.Instance.countdownSystem.Unsubscribe(OnTick);
+            
         }
 
         private void OnTick()
@@ -43,20 +44,21 @@ namespace Game.UI
             _remainingTime--;
             if (_remainingTime <= 0)
             {
-                _remainingTime = GameDataManager.Instance.m_GameData.m_MapData.GetBuildingData(_building.id).m_RemainingGenerationDuration;
+                _remainingTime = GameDataManager.Instance.m_GameData.m_MapData.GetBuildingData(_building.id).m_ResourceGenerationDuration;
                 var goldsGenerated = _building.generatedResources.goldsGenerated;
                 var gemsGenerated = _building.generatedResources.gemsGenerated;
                 if(goldsGenerated > 0)
                 {
-                    GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gold, goldsGenerated, transform.position);
+                    GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gold, goldsGenerated, transform.position + new Vector3(-50f, 20f, 0f));
                     GameManager.Instance.goldSystem.AddGold(goldsGenerated);
                 }
                 if(gemsGenerated > 0)
                 {
-                    GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gem, gemsGenerated, transform.position);
+                    GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gem, gemsGenerated, transform.position + new Vector3(50f, 20f, 0f));
                     GameManager.Instance.gemSystem.AddGem(gemsGenerated);
                 }
             }
+            GameDataManager.Instance.UpdateRemainingGenerationDuration(_buildingId, _remainingTime);
             var scaleFactor = (_building.resourceGenerationDuration - _remainingTime) / _building.resourceGenerationDuration;
             _bar.localScale = new Vector3(scaleFactor, 1f);
             _text.text = $"{_remainingTime}s";

@@ -16,6 +16,7 @@ namespace Game.Common
 
         private void Awake()
         {
+
             Initialize();
         }
 

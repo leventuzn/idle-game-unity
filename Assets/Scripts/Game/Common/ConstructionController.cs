@@ -71,18 +71,21 @@ namespace Game.Common
         {
             if (_isAreaEmpty)
             {
-                GetComponent<Building>().CreateAndUpdateData();
-                UnderConstruction(false);
                 SetPosition();
+                GetComponent<Building>().CreateBuilding();
+                UnderConstruction(false);
+                var tileIndexes = new List<int>();
                 foreach (var tile in _constructionAreaTiles)
                 {
                     var x = tile.GetComponent<Tile>().x;
                     var y = tile.GetComponent<Tile>().y;
+                    var index = x + (y * 10);
+                    tileIndexes.Add(index);
                     GameManager.Instance.UpdateTileAt(x, y);
                 }
-                _progressBar.GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gold, -GetComponent<Building>().cost.goldCost, _progressBar.transform.position);
+                _progressBar.GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gold, -GetComponent<Building>().cost.goldCost, _progressBar.transform.position + new Vector3(-50f, 20f, 0f));
                 GameManager.Instance.goldSystem.SpendGold(GetComponent<Building>().cost.goldCost);
-                _progressBar.GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gem, -GetComponent<Building>().cost.gemCost, _progressBar.transform.position);
+                _progressBar.GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gem, -GetComponent<Building>().cost.gemCost, _progressBar.transform.position + new Vector3(50f, 20f, 0f));
                 GameManager.Instance.gemSystem.SpendGem(GetComponent<Building>().cost.gemCost);
             }
             else
@@ -132,6 +135,13 @@ namespace Game.Common
             }
         }
 
+        public void UnderConstruction(bool underConstruction)
+        {
+            _image.SetActive(underConstruction);
+            _shapeArea.SetActive(underConstruction);
+            _progressBar.SetActive(!underConstruction);
+        }
+
         private void SetPosition()
         {
             var sumPositions = Vector3.zero;
@@ -141,13 +151,6 @@ namespace Game.Common
             }
             var centerPosition = sumPositions / _constructionAreaTiles.Count;
             transform.position = centerPosition;
-        }
-
-        public void UnderConstruction(bool underConstruction)
-        {
-            _image.SetActive(underConstruction);
-            _shapeArea.SetActive(underConstruction);
-            _progressBar.SetActive(!underConstruction);
         }
     }
 }

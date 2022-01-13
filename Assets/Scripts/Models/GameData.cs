@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 /// <summary>
@@ -9,7 +7,6 @@ public class GameData
 {
     public const string TokenPlayerData = "PlayerData";
     public const string TokenMapData = "MapData";
-    public const string TokenBuildingDatas = "BuildingDatas";
 
     public PlayerData m_PlayerData;
     public MapData m_MapData;
@@ -31,7 +28,7 @@ public class GameData
     {
         JObject data = new JObject();
         data.Add(TokenPlayerData, m_PlayerData.Serialize());
-        data.Add(TokenPlayerData, m_MapData.Serialize());
+        data.Add(TokenMapData, m_MapData.Serialize());
         return data;
     }
 

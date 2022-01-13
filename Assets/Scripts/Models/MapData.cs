@@ -35,20 +35,6 @@ public class MapData
         return data;
     }
 
-    public void UpdateBuildingData(BuildingData buildingData)
-    {
-        BuildingData data = GetBuildingData(buildingData.m_Id);
-        if (data == null)
-        {
-            m_Buildings.Add(buildingData);
-        }
-        else
-        {
-            data.m_Building = buildingData.m_Building;
-            data.m_RemainingGenerationDuration = buildingData.m_RemainingGenerationDuration;
-        }
-    }
-
     public JObject Serialize()
     {
         JObject data = new JObject();
@@ -80,7 +66,7 @@ public class MapData
 
     private void SortBuildingData()
     {
-        List<BuildingData> buildings = m_Buildings.GroupBy(s => s.m_Building).Select(x => x.First()).ToList();
+        List<BuildingData> buildings = m_Buildings.GroupBy(s => s.m_Id).Select(x => x.First()).ToList();
         m_Buildings = buildings;
     }
 }

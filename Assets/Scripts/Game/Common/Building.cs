@@ -20,39 +20,35 @@ namespace Game.Common
 
         public BuildingShape shape;
 
-        public Vector3 position;
-
-        public void SetData(BuildingSO buildingData)
+        public void SetData(BuildingSO buildingSO)
         {
-            image.sprite = buildingData.image;
-            id = GameDataManager.Instance.m_GameData.m_MapData.m_Buildings.Count;
-            cost = buildingData.cost;
-            resourceGenerationDuration = buildingData.resourceGenerationDuration;
-            generatedResources = buildingData.generatedResources;
-            shape = buildingData.shape;
+            image.sprite = buildingSO.image;
+            cost = buildingSO.cost;
+            resourceGenerationDuration = buildingSO.resourceGenerationDuration;
+            generatedResources = buildingSO.generatedResources;
+            shape = buildingSO.shape;
         }
 
         public void LoadData(BuildingData buildingData)
         {
             id = buildingData.m_Id;
-            image.sprite = buildingData.m_Building.image.sprite;
-            cost = buildingData.m_Building.cost;
-            resourceGenerationDuration = buildingData.m_Building.resourceGenerationDuration;
-            generatedResources = buildingData.m_Building.generatedResources;
-            shape = buildingData.m_Building.shape;
-            position = buildingData.m_Building.position;
+            resourceGenerationDuration = buildingData.m_ResourceGenerationDuration;
+            generatedResources = buildingData.m_GeneratedResources;
+            gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(buildingData.m_BuildPositionX, buildingData.m_BuildPositionY);
         }
 
-        public void CreateAndUpdateData()
+        public void CreateBuilding()
         {
+            id = GameDataManager.Instance.m_GameData.m_MapData.m_Buildings.Count;
             var buildingData = new BuildingData();
             buildingData.m_Id = id;
-            buildingData.m_Building = GetComponent<Building>();
+            buildingData.m_ResourceGenerationDuration = resourceGenerationDuration;
+            buildingData.m_GeneratedResources = generatedResources;
             buildingData.m_RemainingGenerationDuration = resourceGenerationDuration;
-            GameDataManager.Instance.m_GameData.m_MapData.UpdateBuildingData(buildingData);
+            buildingData.m_BuildPositionX = GetComponent<RectTransform>().anchoredPosition.x;
+            buildingData.m_BuildPositionY = GetComponent<RectTransform>().anchoredPosition.y;
+            GameDataManager.Instance.CreateBuildingData(buildingData);
         }
-
-
     }
 }
 

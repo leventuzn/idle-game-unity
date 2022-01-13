@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2205618426003413438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2205618426003413436}
+  - component: {fileID: 2205618426003413437}
+  - component: {fileID: 2205618426003413410}
+  - component: {fileID: 2205618426003413411}
+  - component: {fileID: 2205618426003413409}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2205618426003413436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205618426003413438}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 550.4624, y: 354.49588, z: -382.5189}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2205618426003413437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205618426003413438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7609bb6546cdef248a86345c4ae0338b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emptyTilePoolPrefab: {fileID: 530128064851681349, guid: 0b08c6f38d6e732408052002e94fd13b, type: 3}
+  _buildingTilePoolPrefab: {fileID: 6379021845404265134, guid: bf56d0b6515af1e41bdc5eb260557303, type: 3}
+  _buildingPrefab: {fileID: 4350744172935143750, guid: 165b6077d24a8e34181819541822a738, type: 3}
+  _buildings: {fileID: 0}
+  _tileGrid: {fileID: 0}
+  buildingCardDatas:
+  - {fileID: 11400000, guid: fe2fc335e44c9b8409164780084868eb, type: 2}
+  - {fileID: 11400000, guid: ed9c1f2855ba08f4cb211311235a46bd, type: 2}
+  - {fileID: 11400000, guid: f1ec7613d673d4c4d9bd3571cb48f2f7, type: 2}
+  - {fileID: 11400000, guid: 84b256f445464d34cb2181f66c1ad7f4, type: 2}
+  - {fileID: 11400000, guid: d6a56e8f6a82a6142a68cdce688b685c, type: 2}
+  - {fileID: 11400000, guid: 7ea31a81dabc68b4599df4dc9f1674b6, type: 2}
+  - {fileID: 11400000, guid: 06cd63499f73d414fa91c213ed53b475, type: 2}
+  tiles: []
+  goldSystem: {fileID: 0}
+  gemSystem: {fileID: 0}
+  countdownSystem: {fileID: 0}
+--- !u!114 &2205618426003413410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205618426003413438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23007df3db7deb3418497810521ce7b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2205618426003413411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205618426003413438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55198f2a53262e24791b3f4d8e93a684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2205618426003413409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205618426003413438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37003059309adbc489390c1957f4b535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

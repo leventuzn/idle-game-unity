@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Game.Core;
 using Game.Models;
-using TMPro;
+using Game.Common;
 
 namespace Game.UI
 {
@@ -13,9 +13,6 @@ namespace Game.UI
 
         [SerializeField]
         private Text _gemText;
-
-        [SerializeField]
-        private GameObject _floatingTextPrefab;
 
         // Start is called before the first frame update
         void Start()
@@ -40,7 +37,7 @@ namespace Game.UI
         {
             var amount = numGolds - int.Parse(_goldText.text);
             _goldText.text = numGolds.ToString();
-            GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gold, amount, _goldText.transform.position);
+            GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gold, amount, _goldText.transform.position + new Vector3(-50f, 20f, 0f));
         }
 
         /// <summary>
@@ -51,7 +48,7 @@ namespace Game.UI
         {
             var amount = numGems - int.Parse(_gemText.text);
             _gemText.text = numGems.ToString();
-            GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gem, amount, _gemText.transform.position);
+            GetComponent<AnimationController>().FloatingTextAnimation(ResourceType.Gem, amount, _gemText.transform.position + new Vector3(-50f, 20f, 0f));
         }
     }
 }
